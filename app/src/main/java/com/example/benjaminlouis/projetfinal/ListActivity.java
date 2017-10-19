@@ -3,8 +3,8 @@ package com.example.benjaminlouis.projetfinal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,16 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.List;
 
-public class Main extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    UsersDataSource source = new UsersDataSource(this);
-    UserDAO dao=new UserDAO(source);
+public class ListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private UsersDataSource source = new UsersDataSource(this);
+    private UserDAO dao=new UserDAO(source);
+    boolean modif;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class Main extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Main.this,AjoutActivity.class);
+                Intent intent = new Intent(ListActivity.this,AjoutActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,10 +64,12 @@ public class Main extends AppCompatActivity
     private void printListUsers() {
         List<User> newUsers = this.dao.readAll();
 
-        ListView listUsers = (ListView) findViewById(R.id.listUsers);
-        final ArrayAdapter<User> adapter = new ArrayAdapter<User>(Main.this,
+        RecyclerView listUsers = (RecyclerView) findViewById(R.id.listUsers);
+        listUsers.setLayoutManager(new LinearLayoutManager(this));
+        listUsers.setAdapter(new MyAdapter(newUsers,this));/*
+        final MyAdapter<User> adapter = new ArrayAdapter<User>(ListActivity.this,
                 android.R.layout.simple_list_item_1,newUsers);
-        listUsers.setAdapter(adapter);
+        listUsers.setAdapter(adapter);*/
 
         /*listUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -76,7 +77,7 @@ public class Main extends AppCompatActivity
                 User item = adapter.getItem(position);
                 Log.d("ACTION","CLICKED ON SOMEONE : " + item.toString());
                 // We cannot send a User in an intent, so we send each attribute in extra
-                Intent intent = new Intent(Main.this,AddDeleteActivity.class);
+                Intent intent = new Intent(ListActivity.this,AddDeleteActivity.class);
                 intent.putExtra("id",item.getId());
                 intent.putExtra("family", item.getFamilyName());
                 intent.putExtra("first",item.getFirstName());
@@ -86,6 +87,7 @@ public class Main extends AppCompatActivity
             }
         });*/
     }
+
 
     @Override
     public void onBackPressed() {
@@ -131,11 +133,9 @@ public class Main extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_options) {
 
-        /*} else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {*/
-
         } else if (id == R.id.nav_ajouter) {
+            Intent intent = new Intent(ListActivity.this,AjoutActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_supprimer) {
 
