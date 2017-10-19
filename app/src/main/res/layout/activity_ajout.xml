@@ -7,27 +7,14 @@
     tools:context="com.example.benjaminlouis.projetfinal.AjoutActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nomLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Nom" />
-
     <EditText
         android:id="@+id/nomEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/prenomLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Prénom" />
+        android:ems="10"
+        android:hint="nom"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/prenomEdit"
@@ -35,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:hint="prenom"
         android:inputType="textPersonName" />
 
     <TextView
@@ -97,27 +85,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/mailLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Mail" />
-
     <EditText
         android:id="@+id/mailEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:hint="mail"
         android:inputType="textEmailAddress" />
-
-    <TextView
-        android:id="@+id/telephoneLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Téléphone" />
 
     <EditText
         android:id="@+id/telephoneEdit"
@@ -125,14 +100,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:hint="téléphone"
         android:inputType="phone" />
-
-    <TextView
-        android:id="@+id/cvLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="CV" />
 
     <EditText
         android:id="@+id/cvEdit"
@@ -140,6 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:hint="CV"
         android:inputType="textMultiLine" />
 
     <LinearLayout
