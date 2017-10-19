@@ -20,6 +20,10 @@ public class User implements Parcelable {
     private String telephone;
     private String cv;
 
+    public String toString(){
+        return nom+" "+prenom;
+    }
+
 
     public User(){
         this.nom=null;
