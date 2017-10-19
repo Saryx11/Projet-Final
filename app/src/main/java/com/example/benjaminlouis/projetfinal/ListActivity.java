@@ -3,10 +3,8 @@ package com.example.benjaminlouis.projetfinal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,13 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.List;
 
-public class Main extends AppCompatActivity
+public class ListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     UsersDataSource source = new UsersDataSource(this);
     UserDAO dao=new UserDAO(source);
@@ -46,7 +41,7 @@ public class Main extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Main.this,AjoutActivity.class);
+                Intent intent = new Intent(ListActivity.this,AjoutActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,8 +65,8 @@ public class Main extends AppCompatActivity
 
         RecyclerView listUsers = (RecyclerView) findViewById(R.id.listUsers);
         listUsers.setLayoutManager(new LinearLayoutManager(this));
-        listUsers.setAdapter(new MyAdapter(newUsers));/*
-        final MyAdapter<User> adapter = new ArrayAdapter<User>(Main.this,
+        listUsers.setAdapter(new MyAdapter(newUsers,this));/*
+        final MyAdapter<User> adapter = new ArrayAdapter<User>(ListActivity.this,
                 android.R.layout.simple_list_item_1,newUsers);
         listUsers.setAdapter(adapter);*/
 
@@ -81,7 +76,7 @@ public class Main extends AppCompatActivity
                 User item = adapter.getItem(position);
                 Log.d("ACTION","CLICKED ON SOMEONE : " + item.toString());
                 // We cannot send a User in an intent, so we send each attribute in extra
-                Intent intent = new Intent(Main.this,AddDeleteActivity.class);
+                Intent intent = new Intent(ListActivity.this,AddDeleteActivity.class);
                 intent.putExtra("id",item.getId());
                 intent.putExtra("family", item.getFamilyName());
                 intent.putExtra("first",item.getFirstName());

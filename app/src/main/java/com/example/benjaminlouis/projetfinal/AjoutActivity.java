@@ -52,7 +52,7 @@ public class AjoutActivity extends AppCompatActivity {
                     /*UsersDataSource dataSource = new UsersDataSource(AjoutActivity.this);
                     UserDAO userDAO = dataSource.newUserDAO();
                     user = userDAO.create(user);*/
-                    Intent intent= new Intent(AjoutActivity.this,Main.class);
+                    Intent intent= new Intent(AjoutActivity.this,ListActivity.class);
                     intent.putExtra("add",true);
                     intent.putExtra("user",user);
                     startActivity(intent);
@@ -71,7 +71,7 @@ public class AjoutActivity extends AppCompatActivity {
         annuler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(AjoutActivity.this,Main.class);
+                Intent intent= new Intent(AjoutActivity.this,ListActivity.class);
                 startActivity(intent);
             }
         });
