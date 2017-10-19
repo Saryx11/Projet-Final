@@ -33,16 +33,18 @@
         android:text="Sexe" />
 
     <RadioGroup
+        android:id="@+id/sexeGroupe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
         <RadioButton
-            android:id="@+id/autre"
+            android:id="@+id/masculin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Autre" />
+            android:checked="true"
+            android:text="Masculin" />
 
         <RadioButton
             android:id="@+id/feminin"
@@ -52,11 +54,11 @@
             android:text="Féminin" />
 
         <RadioButton
-            android:id="@+id/masculin"
+            android:id="@+id/autre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Masculin" />
+            android:text="Autre" />
     </RadioGroup>
 
     <TextView

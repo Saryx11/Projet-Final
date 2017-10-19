@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -41,6 +43,13 @@ public class Main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        UsersDataSource source = new UsersDataSource(this);
+        UserDAO dao=new UserDAO(source);
+
+        //création de la liste des utilisateurs pour l'affichage
+        List<User> users=dao.readAll();
     }
 
     @Override
