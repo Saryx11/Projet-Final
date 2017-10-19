@@ -128,7 +128,7 @@ public class ListActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_aide) {
-            Intent intent =new Intent(Main.this,AideActivity.class);
+            Intent intent =new Intent(ListActivity.this,AideActivity.class);
             startActivity(intent);
             // Handle the camera action
         } else if (id == R.id.nav_options) {
