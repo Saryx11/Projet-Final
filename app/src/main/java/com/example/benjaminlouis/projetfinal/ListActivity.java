@@ -17,10 +17,11 @@ import android.view.MenuItem;
 
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    UsersDataSource source = new UsersDataSource(this);
-    UserDAO dao=new UserDAO(source);
+public class ListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private UsersDataSource source = new UsersDataSource(this);
+    private UserDAO dao=new UserDAO(source);
+    boolean modif;
 
 
     @Override
@@ -87,6 +88,7 @@ public class ListActivity extends AppCompatActivity
         });*/
     }
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -129,11 +131,9 @@ public class ListActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_options) {
 
-        /*} else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {*/
-
         } else if (id == R.id.nav_ajouter) {
+            Intent intent = new Intent(ListActivity.this,AjoutActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_supprimer) {
 

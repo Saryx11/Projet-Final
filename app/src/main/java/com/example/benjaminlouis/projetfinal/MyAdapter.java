@@ -36,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 /*Intent intent = new Intent(context,AjoutActivity.class);
                 context.startActivity(intent);*/
             }
