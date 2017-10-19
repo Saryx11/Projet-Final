@@ -126,6 +126,8 @@ public class Main extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_aide) {
+            Intent intent =new Intent(Main.this,AideActivity.class);
+            startActivity(intent);
             // Handle the camera action
         } else if (id == R.id.nav_options) {
 
