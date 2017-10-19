@@ -34,6 +34,7 @@ public class AjoutActivity extends AppCompatActivity {
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String nom =((EditText)findViewById(R.id.nomEdit)).getText().toString();
                 String prenom=((EditText)findViewById(R.id.prenomEdit)).getText().toString();
                 String metier= ((AutoCompleteTextView)findViewById(R.id.metierText)).getText().toString();
@@ -48,10 +49,12 @@ public class AjoutActivity extends AppCompatActivity {
                 if(!nom.equals("")&&!prenom.equals("")&&!metier.equals("")&&!service.equals("")&&!mail.equals("")
                         &&!telephone.equals("")&&!cv.equals("")) {
                     User user = new User(null, nom, prenom, sexe, metier, service, mail, telephone, cv);
-                    UsersDataSource dataSource = new UsersDataSource(AjoutActivity.this);
+                    /*UsersDataSource dataSource = new UsersDataSource(AjoutActivity.this);
                     UserDAO userDAO = dataSource.newUserDAO();
-                    user = userDAO.create(user);
+                    user = userDAO.create(user);*/
                     Intent intent= new Intent(AjoutActivity.this,Main.class);
+                    intent.putExtra("add",true);
+                    intent.putExtra("user",user);
                     startActivity(intent);
                 }
                 else {

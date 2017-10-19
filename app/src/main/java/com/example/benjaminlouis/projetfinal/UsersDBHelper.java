@@ -11,18 +11,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class UsersDBHelper extends SQLiteOpenHelper {
 
 
-    public static final String DB_NAME="Users.db";
-    public static final int DB_Version=1;
+    public static final String DB_NAME="Sante.db";
+    public static final int DB_Version=3;
 
     public UsersDBHelper(Context context){
         super(context, DB_NAME, null, DB_Version);
     }
 
     public static String getQueryCreate(){
-        return "CREATE TABLE Users("
+        return "CREATE TABLE Sante("
                 +"id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +"nom VARCHAR(30) NOT NULL,"
                 +"prenom VARCHAR(20) NOT NULL,"
+                +"sexe VARCHAR (20) NOT NULL,"
                 +"metier VARCHAR(50) NOT NULL,"
                 +"service VARCHAR(50)NOT NULL,"
                 +"mail VARCHAR (50) NOT NULL,"
@@ -32,7 +33,7 @@ public class UsersDBHelper extends SQLiteOpenHelper {
     }
 
     public static String getQueryDrop(){
-        return "DROP TABLE IF EXISTS Users";
+        return "DROP TABLE IF EXISTS Sante";
     }
 
     @Override

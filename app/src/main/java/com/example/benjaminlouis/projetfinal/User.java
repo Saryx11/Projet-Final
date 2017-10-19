@@ -1,10 +1,15 @@
 package com.example.benjaminlouis.projetfinal;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.sql.ResultSet;
+
 /**
  * Created by benjaminlouis on 19/10/2017.
  */
 
-public class User {
+public class User implements Parcelable {
     private Integer id;
     private String nom;
     private String prenom;
@@ -38,6 +43,9 @@ public class User {
         this.telephone = telephone;
         this.cv = cv;
         this.id=id;
+    }
+    public User(Parcel in){
+        readFromParcel(in);
     }
 
     public String getNom() {
@@ -111,4 +119,50 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+
+        if(this.id==null){
+            dest.writeInt(-1);}
+        else{
+            dest.writeInt(this.id);}
+        dest.writeString(this.nom);
+        dest.writeString(this.prenom);
+        dest.writeString(this.sexe);
+        dest.writeString(this.metier);
+        dest.writeString(this.service);
+        dest.writeString(this.mail);
+        dest.writeString(this.telephone);
+        dest.writeString(this.cv);
+    }
+    private void readFromParcel(Parcel in) {
+        this.id=in.readInt();
+        if(this.id==-1)
+            this.id=null;
+        this.nom = in.readString();
+        this.prenom=in.readString();
+        this.sexe=in.readString();
+        this.metier=in.readString();
+        this.service=in.readString();
+        this.mail=in.readString();
+        this.telephone=in.readString();
+        this.cv=in.readString();
+    }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() {
+                public User createFromParcel(Parcel in) {
+                    return new User(in);
+                }
+
+                public User[] newArray(int size) {
+                    return new User[size];
+                }
+            };
 }

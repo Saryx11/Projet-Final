@@ -20,7 +20,7 @@ public class UserDAO {
     private static final String COL_TELEPHONE="telephone";
     private static final String COL_CV="cv";
     private static final String COL_ID="id";
-    private static final String TABLE_NAME="Users";
+    private static final String TABLE_NAME="Sante";
     private static UsersDataSource dataSource;
 
     public UserDAO(UsersDataSource dataSource){
@@ -40,12 +40,9 @@ public class UserDAO {
         values.put(COL_TELEPHONE,user.getTelephone());
         values.put(COL_CV,user.getCv());
 
-
-
-
         int id=(int)this.dataSource.getDb().insert(TABLE_NAME,null,values);
 
-        user.setId(id);
+        //user.setId(id);
         return user;
     }
 
@@ -74,7 +71,7 @@ public class UserDAO {
     }
 
     public User read(User user){
-        String[]allColumns = new String []{COL_ID,COL_NOM,COL_PRENOM,COL_METIER,COL_SERVICE,COL_MAIL,COL_TELEPHONE,COL_CV};
+        String[]allColumns = new String []{COL_ID,COL_NOM,COL_PRENOM,COL_SEXE,COL_METIER,COL_SERVICE,COL_MAIL,COL_TELEPHONE,COL_CV};
         String clause=COL_ID+"=?";
         String[] clauseArgs=new String[]{String.valueOf(user.getId())};
         Cursor cursor = dataSource.getDb().query(TABLE_NAME,allColumns,"ID=?",clauseArgs,null,null,null);
@@ -92,7 +89,7 @@ public class UserDAO {
     }
 
     public List<User> readAll(){
-        String[]allColumns = new String []{COL_ID,COL_NOM,COL_PRENOM,COL_METIER,COL_SERVICE,COL_MAIL,COL_TELEPHONE,COL_CV};
+        String[]allColumns = new String []{COL_ID,COL_NOM,COL_PRENOM,COL_SEXE,COL_METIER,COL_SERVICE,COL_MAIL,COL_TELEPHONE,COL_CV};
         Cursor cursor = dataSource.getDb().query(TABLE_NAME,allColumns,null,null,null,null,null);
         List<User>users=new ArrayList<User>();
         cursor.moveToFirst();
