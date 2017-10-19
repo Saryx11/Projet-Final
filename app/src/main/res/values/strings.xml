@@ -8,6 +8,18 @@
     <string name="action_settings">Préférences</string>
     <string name="title_activity_main">Liste</string>
 
+    <string-array name="services_array">
+        <item>Laboratoire</item>
+        <item>Maternité</item>
+        <item>Gynécologie</item>
+        <item>Neurologie</item>
+        <item>Chirurgie</item>
+        <item>Ophtalmologie</item>
+        <item>Urologie</item>
+        <item>Podologie</item>
+    </string-array>
+
+
     <string name="actions">Actions</string>
     <string name="aide">Page aide</string>
     <string name="options">Options</string>
