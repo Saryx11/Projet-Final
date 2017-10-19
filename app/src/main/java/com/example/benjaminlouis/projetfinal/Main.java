@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -24,6 +26,7 @@ public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     UsersDataSource source = new UsersDataSource(this);
     UserDAO dao=new UserDAO(source);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +68,12 @@ public class Main extends AppCompatActivity
     private void printListUsers() {
         List<User> newUsers = this.dao.readAll();
 
-        ListView listUsers = (ListView) findViewById(R.id.listUsers);
-        final ArrayAdapter<User> adapter = new ArrayAdapter<User>(Main.this,
+        RecyclerView listUsers = (RecyclerView) findViewById(R.id.listUsers);
+        listUsers.setLayoutManager(new LinearLayoutManager(this));
+        listUsers.setAdapter(new MyAdapter(newUsers));/*
+        final MyAdapter<User> adapter = new ArrayAdapter<User>(Main.this,
                 android.R.layout.simple_list_item_1,newUsers);
-        listUsers.setAdapter(adapter);
+        listUsers.setAdapter(adapter);*/
 
         /*listUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
