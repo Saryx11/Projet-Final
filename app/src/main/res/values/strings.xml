@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ProjetFinal</string>
+    <string name="title_activity_menu">Menu</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Préférences</string>
+    <string name="title_activity_main">Liste</string>
+
+    <string name="actions">Actions</string>
+    <string name="aide">Page aide</string>
+    <string name="options">Options</string>
+    <string name="ajouter">Ajouter un utilisateur</string>
+    <string name="supprimer">Supprimer un utilisateur</string>
+    <string name="vider">Vider la base d\'utilisateurs</string>
+
+    <string name="titre">Projet Final</string>
+</resources>
