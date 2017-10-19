@@ -6,50 +6,72 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/nomView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/prenomView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/sexeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/metierview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/serviceView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/mailView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/telephoneView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/cvView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_weight="4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/callButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Appeler" />
+
+        <Button
+            android:id="@+id/mailButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mail" />
+    </LinearLayout>
+
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.benjaminlouis.projetfinal;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -18,10 +19,13 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     List<User> list;
     Context context;
+    Fragment frag;
+    int pos;
 
-    public MyAdapter(List<User> list, Context context){
+    public MyAdapter(List<User> list, Context context,Fragment frag){
         this.list=list;
         this.context=context;
+        this.frag=frag;
     }
 
 
@@ -33,14 +37,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTextView.setText(list.get(position).toString());
-        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+        this.pos=position;
+        holder.mTextView.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
+                AfficheUser usrFrag = (AfficheUser) frag.getFragmentManager().findFragmentById(R.id.userInfo);
+                if (usrFrag != null) {
+                    usrFrag.updateUserView(list.get(pos));
+                }
 
-                /*Intent intent = new Intent(context,AjoutActivity.class);
-                context.startActivity(intent);*/
             }
-        });
+    });
     }
 
 

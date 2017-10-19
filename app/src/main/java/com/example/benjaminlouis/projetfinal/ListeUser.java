@@ -2,6 +2,7 @@ package com.example.benjaminlouis.projetfinal;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,22 +27,24 @@ public class ListeUser extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_liste, container, false);
-        this.liste=view.findViewById(R.id.listUsers);
         this.source = new UsersDataSource(this.getContext());
         this.dao=new UserDAO(source);
+        View view = inflater.inflate(R.layout.fragment_liste, container, false);
+        Intent intent= getActivity().getIntent();
+        Boolean addIntent = intent.getBooleanExtra("add", false);
+        if(addIntent){
+            User u=intent.getParcelableExtra("user");
+            dao.create(u);
+        }
+        this.liste=view.findViewById(R.id.listUsers);
         printListUsers();
         return view;
-
     }
 
     private void printListUsers() {
         List<User> newUsers = this.dao.readAll();
         liste.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        liste.setAdapter(new MyAdapter(newUsers,this.getContext()));
-
-
+        liste.setAdapter(new MyAdapter(newUsers,this.getContext(),this));
     }
 
 }

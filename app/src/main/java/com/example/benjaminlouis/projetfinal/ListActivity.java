@@ -39,13 +39,8 @@ public class ListActivity extends AppCompatActivity implements NavigationView.On
             ListeUser firstFragment = new ListeUser();
             firstFragment.setArguments(getIntent().getExtras());
             getFragmentManager().beginTransaction().add(R.id.fragment_container, firstFragment).commit();
+
         }
-        /*Intent intent=getIntent();
-        Boolean addIntent = intent.getBooleanExtra("add", false);
-        if(addIntent){
-            User u=intent.getParcelableExtra("user");
-            dao.create(u);
-        }*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
