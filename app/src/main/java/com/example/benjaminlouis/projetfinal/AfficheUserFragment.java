@@ -1,9 +1,12 @@
 package com.example.benjaminlouis.projetfinal;
 
+import android.app.Dialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +25,7 @@ public class AfficheUserFragment extends Fragment {
     Button appel;
     View view;
     User u;
-
+    boolean confirm;
     public AfficheUserFragment(){
 
     }
@@ -32,12 +35,12 @@ public class AfficheUserFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_user, container, false);
         u=null;
+
         if(this.getArguments()!=null) {
             u = this.getArguments().getParcelable("user");
         }
 
         if(u!=null) {
-
             ((TextView)view.findViewById(R.id.nomView)).setText(u.getNom());
             ((TextView)view.findViewById(R.id.prenomView)).setText(u.getPrenom());
             ((TextView)view.findViewById(R.id.cvView)).setText(u.getCv());
@@ -46,21 +49,6 @@ public class AfficheUserFragment extends Fragment {
             ((TextView)view.findViewById(R.id.sexeView)).setText(u.getSexe());
             ((TextView)view.findViewById(R.id.serviceView)).setText(u.getService());
             ((TextView)view.findViewById(R.id.telephoneView)).setText(u.getTelephone());
-
-            /*RadioGroup groupe =(RadioGroup)view.findViewById(R.id.sexeGroupe);
-            for (int i=0;i< groupe.getChildCount();i++) {
-                View o = groupe.getChildAt(i);
-                if (o instanceof RadioButton) {
-                    if(((RadioButton) o).getText().equals(usr.getSexe())){
-                        ((RadioButton) o).setChecked(true);
-                    }
-                }
-            }
-
-            Spinner serv=(Spinner)view.findViewById(R.id.serviceSpinner);
-            ArrayAdapter<String> adapter=(ArrayAdapter<String>)serv.getAdapter();
-            serv.setSelection(adapter.getPosition(usr.getService()));*/
-
         }
 
         Button appel=view.findViewById(R.id.callButton);
@@ -73,7 +61,6 @@ public class AfficheUserFragment extends Fragment {
             }
         });
 
-
         Button mail = view.findViewById(R.id.mailButton);
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +71,7 @@ public class AfficheUserFragment extends Fragment {
                 startActivity(i);
             }
         });
+
         Button modifier = view.findViewById(R.id.modifier);
         modifier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,22 +82,44 @@ public class AfficheUserFragment extends Fragment {
                 startActivity(i);
             }
         });
+
         Button supprimer = view.findViewById(R.id.supprimer);
         supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getActivity(),ListActivity.class);
-                i.putExtra("suppr",true);
-                i.putExtra("user",u);
-                startActivity(i);
+
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                adb.setMessage("Confirmez vous la suppression");
+                adb.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        confirm=true;
+                    }
+                });
+
+                adb.setNegativeButton("NON", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        confirm=false;
+                    }
+                });
+
+                adb.show();
+                if (confirm){
+                    Intent i=new Intent(getActivity(),ListActivity.class);
+                    i.putExtra("suppr",true);
+                    i.putExtra("user",u);
+                    startActivity(i);
+                }
             }
         });
 
         return view;
-
     }
 
+
     public void updateUserView(User usr){
+
         this.u=usr;
         ((TextView)view.findViewById(R.id.nomView)).setText(usr.getNom());
         ((TextView)view.findViewById(R.id.prenomView)).setText(usr.getPrenom());
@@ -120,4 +130,5 @@ public class AfficheUserFragment extends Fragment {
         ((TextView)view.findViewById(R.id.serviceView)).setText(usr.getService());
         ((TextView)view.findViewById(R.id.telephoneView)).setText(usr.getTelephone());
     }
+    
 }
