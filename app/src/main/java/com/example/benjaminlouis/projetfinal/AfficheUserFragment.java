@@ -23,6 +23,9 @@ import android.widget.TextView;
 
 public class AfficheUserFragment extends Fragment {
     Button appel;
+    Button mail;
+    Button modifier;
+    Button supprimer;
     View view;
     User u;
     boolean confirm;
@@ -35,23 +38,34 @@ public class AfficheUserFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_user, container, false);
         u=null;
+        appel=view.findViewById(R.id.callButton);
+        mail = view.findViewById(R.id.mailButton);
+        modifier = view.findViewById(R.id.modifier);
+        supprimer = view.findViewById(R.id.supprimer);
+        appel.setEnabled(false);
+        mail.setEnabled(false);
+        modifier.setEnabled(false);
+        supprimer.setEnabled(false);
 
         if(this.getArguments()!=null) {
             u = this.getArguments().getParcelable("user");
         }
 
         if(u!=null) {
-            ((TextView)view.findViewById(R.id.nomView)).setText(u.getNom());
+            updateUserView(u);
+            /*((TextView)view.findViewById(R.id.nomView)).setText(u.getNom());
             ((TextView)view.findViewById(R.id.prenomView)).setText(u.getPrenom());
             ((TextView)view.findViewById(R.id.cvView)).setText(u.getCv());
             ((TextView)view.findViewById(R.id.metierview)).setText(u.getMetier());
             ((TextView)view.findViewById(R.id.mailView)).setText(u.getMail());
             ((TextView)view.findViewById(R.id.sexeView)).setText(u.getSexe());
             ((TextView)view.findViewById(R.id.serviceView)).setText(u.getService());
-            ((TextView)view.findViewById(R.id.telephoneView)).setText(u.getTelephone());
+            ((TextView)view.findViewById(R.id.telephoneView)).setText(u.getTelephone());*/
+
+
         }
 
-        Button appel=view.findViewById(R.id.callButton);
+
         appel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +75,7 @@ public class AfficheUserFragment extends Fragment {
             }
         });
 
-        Button mail = view.findViewById(R.id.mailButton);
+
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +86,7 @@ public class AfficheUserFragment extends Fragment {
             }
         });
 
-        Button modifier = view.findViewById(R.id.modifier);
+
         modifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +97,7 @@ public class AfficheUserFragment extends Fragment {
             }
         });
 
-        Button supprimer = view.findViewById(R.id.supprimer);
+
         supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,24 +107,29 @@ public class AfficheUserFragment extends Fragment {
                 adb.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        confirm=true;
+                        //confirm=true;
+                        Intent i=new Intent(getActivity(),ListActivity.class);
+                        i.putExtra("suppr",true);
+                        i.putExtra("user",u);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
                     }
                 });
 
                 adb.setNegativeButton("NON", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        confirm=false;
+                        //confirm=false;
                     }
                 });
 
                 adb.show();
-                if (confirm){
+                /*if (confirm){
                     Intent i=new Intent(getActivity(),ListActivity.class);
                     i.putExtra("suppr",true);
                     i.putExtra("user",u);
                     startActivity(i);
-                }
+                }*/
             }
         });
 
@@ -121,6 +140,10 @@ public class AfficheUserFragment extends Fragment {
     public void updateUserView(User usr){
 
         this.u=usr;
+        appel=view.findViewById(R.id.callButton);
+        mail = view.findViewById(R.id.mailButton);
+        modifier = view.findViewById(R.id.modifier);
+        supprimer = view.findViewById(R.id.supprimer);
         ((TextView)view.findViewById(R.id.nomView)).setText(usr.getNom());
         ((TextView)view.findViewById(R.id.prenomView)).setText(usr.getPrenom());
         ((TextView)view.findViewById(R.id.cvView)).setText(usr.getCv());
@@ -129,6 +152,10 @@ public class AfficheUserFragment extends Fragment {
         ((TextView)view.findViewById(R.id.sexeView)).setText(usr.getSexe());
         ((TextView)view.findViewById(R.id.serviceView)).setText(usr.getService());
         ((TextView)view.findViewById(R.id.telephoneView)).setText(usr.getTelephone());
+        appel.setEnabled(true);
+        mail.setEnabled(true);
+        modifier.setEnabled(true);
+        supprimer.setEnabled(true);
     }
-    
+
 }

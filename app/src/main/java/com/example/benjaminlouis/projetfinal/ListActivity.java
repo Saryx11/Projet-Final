@@ -2,6 +2,7 @@ package com.example.benjaminlouis.projetfinal;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -16,9 +17,6 @@ import android.view.MenuItem;
 
 public class ListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,21 +24,16 @@ public class ListActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         //Si fragment container existe->non large
         if (findViewById(R.id.fragment_container) != null) {
-
             if (savedInstanceState != null) {
                 return;
             }
-
             //On ajoute un fragment liste à fragment container
             ListeUserFragment firstFragment = new ListeUserFragment();
             firstFragment.setArguments(getIntent().getExtras());
             getFragmentManager().beginTransaction().add(R.id.fragment_container, firstFragment).commit();
-
         }
-
         //floating button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +43,6 @@ public class ListActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-
         //Drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -92,7 +84,8 @@ public class ListActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(ListActivity.this,PreferencesActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -107,17 +100,13 @@ public class ListActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_aide) {
             Intent intent =new Intent(ListActivity.this,AideActivity.class);
             startActivity(intent);
-            // Handle the camera action
         } else if (id == R.id.nav_options) {
+            Intent intent = new Intent(ListActivity.this,PreferencesActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_ajouter) {
             Intent intent = new Intent(ListActivity.this,AjoutActivity.class);
             startActivity(intent);
-
-        } else if (id == R.id.nav_supprimer) {
-
-        } else if (id==R.id.nav_vider){
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
