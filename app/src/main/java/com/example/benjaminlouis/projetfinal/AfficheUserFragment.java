@@ -21,6 +21,7 @@ import android.widget.TextView;
 public class AfficheUserFragment extends Fragment {
     Button appel;
     View view;
+    User u;
 
     public AfficheUserFragment(){
 
@@ -30,7 +31,7 @@ public class AfficheUserFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_user, container, false);
-        User u=null;
+        u=null;
         if(this.getArguments()!=null) {
             u = this.getArguments().getParcelable("user");
         }
@@ -83,12 +84,33 @@ public class AfficheUserFragment extends Fragment {
                 startActivity(i);
             }
         });
+        Button modifier = view.findViewById(R.id.modifier);
+        modifier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),AjoutActivity.class);
+                i.putExtra("modif",true);
+                i.putExtra("user",u);
+                startActivity(i);
+            }
+        });
+        Button supprimer = view.findViewById(R.id.supprimer);
+        supprimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),ListActivity.class);
+                i.putExtra("suppr",true);
+                i.putExtra("user",u);
+                startActivity(i);
+            }
+        });
 
         return view;
 
     }
 
     public void updateUserView(User usr){
+        this.u=usr;
         ((TextView)view.findViewById(R.id.nomView)).setText(usr.getNom());
         ((TextView)view.findViewById(R.id.prenomView)).setText(usr.getPrenom());
         ((TextView)view.findViewById(R.id.cvView)).setText(usr.getCv());
@@ -97,24 +119,5 @@ public class AfficheUserFragment extends Fragment {
         ((TextView)view.findViewById(R.id.sexeView)).setText(usr.getSexe());
         ((TextView)view.findViewById(R.id.serviceView)).setText(usr.getService());
         ((TextView)view.findViewById(R.id.telephoneView)).setText(usr.getTelephone());
-        /*((TextView)view.findViewById(R.id.nomView)).setText(usr.getNom());
-        ((TextView)view.findViewById(R.id.prenomView)).setText(usr.getPrenom());
-        ((TextView)view.findViewById(R.id.cvView)).setText(usr.getCv());
-        ((TextView)view.findViewById(R.id.metierview)).setText(usr.getMetier());
-        ((TextView)view.findViewById(R.id.mailView)).setText(usr.getMail());
-        ((TextView)view.findViewById(R.id.telephoneView)).setText(usr.getTelephone());
-        RadioGroup groupe =(RadioGroup)getView().findViewById(R.id.sexeGroupe);
-        for (int i=0;i< groupe.getChildCount();i++) {
-            View o = groupe.getChildAt(i);
-            if (o instanceof RadioButton) {
-                if(((RadioButton) o).getText().equals(usr.getSexe())){
-                    ((RadioButton) o).setChecked(true);
-                }
-            }
-        }
-
-        Spinner serv=(Spinner)getView().findViewById(R.id.serviceSpinner);
-        ArrayAdapter<String> adapter=(ArrayAdapter<String>)serv.getAdapter();
-        serv.setSelection(adapter.getPosition(usr.getService()));*/
     }
 }
