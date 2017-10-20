@@ -3,9 +3,7 @@ package com.example.benjaminlouis.projetfinal;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,18 +52,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         {
             @Override
             public void onClick(View v) {
-                AfficheUser usrFrag = (AfficheUser) frag.getFragmentManager().findFragmentById(R.id.userInfo);
+
+                //On récupère le fragment fraginfo
+                AfficheUserFragment usrFrag = (AfficheUserFragment) frag.getFragmentManager().findFragmentById(R.id.fraginfo);
+                //s'il existe ->large donc on update le fragment
                 if (usrFrag != null) {
                     usrFrag.updateUserView(u);
                 }
-                else{// Create fragment and give it an argument specifying the article it should show
-                    AfficheUser newFragment = new AfficheUser();
+                else{
+                    //Sinon on créé le fragment avec un user en argument
+                    AfficheUserFragment newFragment = new AfficheUserFragment();
                     Bundle args =new Bundle();
                     args.putParcelable("user",u);
                     newFragment.setArguments(args);
                     FragmentTransaction transaction = frag.getFragmentManager().beginTransaction();
                     // Replace whatever is in the fragment_container view with this fragment,
                     // and add the transaction to the back stack so the user can navigate back
+                    //et on le met à la place de ce qu'il y a dans fragment container
                     transaction.replace(R.id.fragment_container, newFragment);
                     transaction.addToBackStack(null);
 

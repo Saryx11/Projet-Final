@@ -15,21 +15,20 @@ import java.util.List;
  * Created by benjaminlouis on 19/10/2017.
  */
 
-public class ListeUser extends Fragment {
+public class ListeUserFragment extends Fragment {
     private UsersDataSource source;
     private UserDAO dao;
     private RecyclerView liste;
 
-    public ListeUser(){
-
-
+    public ListeUserFragment(){
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.source = new UsersDataSource(this.getContext());
+        this.source = new UsersDataSource(this.getActivity());
         this.dao=new UserDAO(source);
         View view = inflater.inflate(R.layout.fragment_liste, container, false);
+
         Intent intent= getActivity().getIntent();
         Boolean addIntent = intent.getBooleanExtra("add", false);
         if(addIntent){

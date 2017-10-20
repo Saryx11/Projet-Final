@@ -18,11 +18,11 @@ import android.widget.TextView;
  * Created by benjaminlouis on 19/10/2017.
  */
 
-public class AfficheUser extends Fragment {
+public class AfficheUserFragment extends Fragment {
     Button appel;
     View view;
 
-    public AfficheUser(){
+    public AfficheUserFragment(){
 
     }
 
@@ -30,7 +30,10 @@ public class AfficheUser extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_user, container, false);
-        User u=this.getArguments().getParcelable("user");
+        User u=null;
+        if(this.getArguments()!=null) {
+            u = this.getArguments().getParcelable("user");
+        }
 
         if(u!=null) {
 
@@ -86,12 +89,20 @@ public class AfficheUser extends Fragment {
     }
 
     public void updateUserView(User usr){
-        ((TextView)getView().findViewById(R.id.nomView)).setText(usr.getNom());
-        ((TextView)getView().findViewById(R.id.prenomView)).setText(usr.getPrenom());
-        ((TextView)getView().findViewById(R.id.cvView)).setText(usr.getCv());
-        ((TextView)getView().findViewById(R.id.metierview)).setText(usr.getMetier());
-        ((TextView)getView().findViewById(R.id.mailView)).setText(usr.getMail());
-        ((TextView)getView().findViewById(R.id.telephoneView)).setText(usr.getTelephone());
+        ((TextView)view.findViewById(R.id.nomView)).setText(usr.getNom());
+        ((TextView)view.findViewById(R.id.prenomView)).setText(usr.getPrenom());
+        ((TextView)view.findViewById(R.id.cvView)).setText(usr.getCv());
+        ((TextView)view.findViewById(R.id.metierview)).setText(usr.getMetier());
+        ((TextView)view.findViewById(R.id.mailView)).setText(usr.getMail());
+        ((TextView)view.findViewById(R.id.sexeView)).setText(usr.getSexe());
+        ((TextView)view.findViewById(R.id.serviceView)).setText(usr.getService());
+        ((TextView)view.findViewById(R.id.telephoneView)).setText(usr.getTelephone());
+        /*((TextView)view.findViewById(R.id.nomView)).setText(usr.getNom());
+        ((TextView)view.findViewById(R.id.prenomView)).setText(usr.getPrenom());
+        ((TextView)view.findViewById(R.id.cvView)).setText(usr.getCv());
+        ((TextView)view.findViewById(R.id.metierview)).setText(usr.getMetier());
+        ((TextView)view.findViewById(R.id.mailView)).setText(usr.getMail());
+        ((TextView)view.findViewById(R.id.telephoneView)).setText(usr.getTelephone());
         RadioGroup groupe =(RadioGroup)getView().findViewById(R.id.sexeGroupe);
         for (int i=0;i< groupe.getChildCount();i++) {
             View o = groupe.getChildAt(i);
@@ -104,6 +115,6 @@ public class AfficheUser extends Fragment {
 
         Spinner serv=(Spinner)getView().findViewById(R.id.serviceSpinner);
         ArrayAdapter<String> adapter=(ArrayAdapter<String>)serv.getAdapter();
-        serv.setSelection(adapter.getPosition(usr.getService()));
+        serv.setSelection(adapter.getPosition(usr.getService()));*/
     }
 }
