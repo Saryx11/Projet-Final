@@ -12,9 +12,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AjoutActivity extends AppCompatActivity {
+    boolean modif;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +25,35 @@ public class AjoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ajout);
 
         Spinner spinner = (Spinner) findViewById(R.id.serviceSpinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.services_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        Intent addIntent=getIntent();
+        modif=addIntent.getBooleanExtra("modif",false);
+
+        if(modif){
+            User u=addIntent.getParcelableExtra("user");
+            id=u.getId();
+            ((TextView)findViewById(R.id.nomEdit)).setText(u.getNom());
+            ((TextView)findViewById(R.id.prenomEdit)).setText(u.getPrenom());
+            ((TextView)findViewById(R.id.cvEdit)).setText(u.getCv());
+            ((TextView)findViewById(R.id.metierText)).setText(u.getMetier());
+            ((TextView)findViewById(R.id.mailEdit)).setText(u.getMail());
+            ((TextView)findViewById(R.id.telephoneEdit)).setText(u.getTelephone());
+            RadioGroup groupe =(RadioGroup)findViewById(R.id.sexeGroupe);
+            for (int i=0;i< groupe.getChildCount();i++) {
+                View o = groupe.getChildAt(i);
+                if (o instanceof RadioButton) {
+                    if(((RadioButton) o).getText().equals(u.getSexe())){
+                        ((RadioButton) o).setChecked(true);
+                    }
+                }
+            }
+
+            Spinner serv=(Spinner)findViewById(R.id.serviceSpinner);
+            serv.setSelection(adapter.getPosition(u.getService()));
+        }
 
         Button valider = (Button)findViewById(R.id.valider);
         valider.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +78,13 @@ public class AjoutActivity extends AppCompatActivity {
                     UserDAO userDAO = dataSource.newUserDAO();
                     user = userDAO.create(user);*/
                     Intent intent= new Intent(AjoutActivity.this,ListActivity.class);
-                    intent.putExtra("add",true);
+                    if(modif){
+                        user.setId(id);
+                        intent.putExtra("modif",true);
+                    }
+                    else {
+                        intent.putExtra("add", true);
+                    }
                     intent.putExtra("user",user);
                     startActivity(intent);
                 }

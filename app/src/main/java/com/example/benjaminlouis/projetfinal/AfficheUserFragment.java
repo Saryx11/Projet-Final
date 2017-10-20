@@ -21,6 +21,7 @@ import android.widget.TextView;
 public class AfficheUserFragment extends Fragment {
     Button appel;
     View view;
+    User u;
 
     public AfficheUserFragment(){
 
@@ -30,7 +31,7 @@ public class AfficheUserFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_user, container, false);
-        User u=null;
+        u=null;
         if(this.getArguments()!=null) {
             u = this.getArguments().getParcelable("user");
         }
@@ -80,6 +81,16 @@ public class AfficheUserFragment extends Fragment {
                 Uri mail = Uri.parse("mailto:"+((TextView)view.findViewById(R.id.mailView)).getText().toString());
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("message/rfc822");
+                startActivity(i);
+            }
+        });
+        Button modifier = view.findViewById(R.id.modifier);
+        modifier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),AjoutActivity.class);
+                i.putExtra("modif",true);
+                i.putExtra("user",u);
                 startActivity(i);
             }
         });
