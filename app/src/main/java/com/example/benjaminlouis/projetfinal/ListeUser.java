@@ -44,7 +44,7 @@ public class ListeUser extends Fragment {
     private void printListUsers() {
         List<User> newUsers = this.dao.readAll();
         liste.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        liste.setAdapter(new MyAdapter(newUsers,this.getContext(),this));
+        liste.setAdapter(new MyAdapter(newUsers,this));
     }
 
 }
