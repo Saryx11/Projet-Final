@@ -110,6 +110,7 @@ public class AfficheUserFragment extends Fragment {
     }
 
     public void updateUserView(User usr){
+        this.u=usr;
         ((TextView)view.findViewById(R.id.nomView)).setText(usr.getNom());
         ((TextView)view.findViewById(R.id.prenomView)).setText(usr.getPrenom());
         ((TextView)view.findViewById(R.id.cvView)).setText(usr.getCv());
