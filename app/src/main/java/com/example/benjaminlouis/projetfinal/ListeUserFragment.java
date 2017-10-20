@@ -32,6 +32,7 @@ public class ListeUserFragment extends Fragment {
         Intent intent= getActivity().getIntent();
         Boolean addIntent = intent.getBooleanExtra("add", false);
         Boolean modifIntent = intent.getBooleanExtra("modif",false);
+        Boolean supprIntent = intent.getBooleanExtra("suppr",false);
         if(addIntent){
             User u=intent.getParcelableExtra("user");
             dao.create(u);
@@ -39,6 +40,10 @@ public class ListeUserFragment extends Fragment {
         if(modifIntent){
             User u=intent.getParcelableExtra("user");
             dao.update(u);
+        }
+        if(supprIntent){
+            User u = intent.getParcelableExtra("user");
+            dao.delete(u);
         }
 
 
